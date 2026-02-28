@@ -1,1130 +1,518 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>restaurantsATX — Austin eats, no BS.</title>
-  <meta name="description" content="Honest, opinionated restaurant recommendations from people who actually live in Austin. No ads, no influencers, no pay-to-play. Just real recs.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400;1,9..40,500&family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>restaurantsATX – One Restaurant. One Story. Every Week.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Figtree:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
-    /* ========== RESET & BASE ========== */
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
     :root {
-      --color-bg: #0C0A09;
-      --color-surface: #1C1917;
-      --color-surface-hover: #292524;
-      --color-border: #44403C;
-      --color-text: #F5F5F4;
-      --color-text-muted: #A8A29E;
-      --color-accent: #F97316;
-      --color-accent-hover: #FB923C;
-      --color-accent-subtle: #431407;
-      --color-green: #4ADE80;
-      --color-red: #F87171;
-      --color-amber: #FBBF24;
-      --font-body: 'DM Sans', sans-serif;
-      --font-display: 'Playfair Display', serif;
+      --orange:     #E8510A;
+      --orange-lt:  #F47035;
+      --orange-dim: #fdeee6;
+      --green:      #2E7D32;
+      --green-lt:   #4CAF50;
+      --green-dim:  #e8f5e9;
+      --charcoal:   #2B2B2B;
+      --mid:        #5a5a5a;
+      --rule:       #e0d8ce;
+      --offwhite:   #f7f4f0;
+      --white:      #ffffff;
     }
 
-    html { scroll-behavior: smooth; font-size: 16px; }
-
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: var(--font-body);
-      background-color: var(--color-bg);
-      color: var(--color-text);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
+      font-family: 'Figtree', sans-serif;
+      background: var(--offwhite);
+      color: var(--charcoal);
       overflow-x: hidden;
     }
+    h1,h2,h3,h4 { font-family: 'Playfair Display', serif; }
+    a { text-decoration: none; color: inherit; }
 
-    a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
-    button { font-family: inherit; cursor: pointer; border: none; }
-
-    /* ========== LAYOUT ========== */
-    .container {
-      width: 100%;
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    section { padding: 96px 0; }
-
-    @media (max-width: 768px) {
-      section { padding: 64px 0; }
-    }
-
-    /* ========== NAV ========== */
+    /* ── NAV ─────────────────────────────────────────── */
     nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      padding: 16px 0;
-      background: rgba(12, 10, 9, 0.8);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(68, 64, 60, 0.3);
+      background: var(--white);
+      border-bottom: 2px solid var(--orange);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem; height: 70px;
+      box-shadow: 0 2px 12px rgba(232,81,10,.07);
     }
-
-    nav .container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    .nav-logo { display: flex; align-items: center; }
+    .nav-logo img { height: 52px; width: auto; }
+    .nav-links {
+      display: flex; align-items: center; gap: 2rem; list-style: none;
     }
-
-    .logo {
-      font-family: var(--font-body);
-      font-weight: 700;
-      font-size: 1.25rem;
-      letter-spacing: -0.02em;
+    .nav-links a {
+      font-size: .85rem; font-weight: 600; letter-spacing: .04em;
+      text-transform: uppercase; color: var(--charcoal);
+      padding-bottom: 3px; border-bottom: 2px solid transparent;
+      transition: color .2s, border-color .2s;
     }
-
-    .logo span { color: var(--color-accent); }
-
+    .nav-links a:hover { color: var(--orange); border-color: var(--orange); }
     .nav-cta {
-      padding: 10px 24px;
-      background: var(--color-accent);
-      color: var(--color-bg);
-      font-weight: 700;
-      font-size: 0.875rem;
-      border-radius: 100px;
-      transition: background 0.2s, transform 0.2s;
-      letter-spacing: 0.01em;
+      background: var(--orange); color: var(--white) !important;
+      padding: .45rem 1.2rem; border-radius: 5px; border-bottom: none !important;
     }
+    .nav-cta:hover { background: var(--orange-lt) !important; }
 
-    .nav-cta:hover { background: var(--color-accent-hover); transform: translateY(-1px); }
-
-    /* ========== HERO ========== */
+    /* ── HERO ────────────────────────────────────────── */
     .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      position: relative;
-      padding-top: 80px;
-      overflow: hidden;
+      min-height: 88vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      padding: 5rem 2rem 4rem;
+      position: relative; overflow: hidden;
+      background: var(--offwhite);
     }
-
     .hero::before {
       content: '';
-      position: absolute;
-      top: -200px;
-      right: -300px;
-      width: 800px;
-      height: 800px;
-      background: radial-gradient(circle, rgba(249, 115, 22, 0.08) 0%, transparent 70%);
+      position: absolute; top: -20%; left: 50%; transform: translateX(-50%);
+      width: 800px; height: 800px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(232,81,10,.07) 0%, transparent 70%);
       pointer-events: none;
     }
-
-    .hero::after {
-      content: '';
-      position: absolute;
-      bottom: -100px;
-      left: -200px;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(249, 115, 22, 0.04) 0%, transparent 70%);
-      pointer-events: none;
+    .hero-inner {
+      position: relative; z-index: 2;
+      max-width: 720px; margin: 0 auto;
     }
-
-    .hero .container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: center;
+    .hero-logo {
+      margin: 0 auto 2rem;
+      width: clamp(180px, 30vw, 260px);
+      animation: fadeUp .7s ease both;
     }
+    .hero-logo img { width: 100%; height: auto; }
 
-    .hero-content { position: relative; z-index: 1; }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 16px;
-      background: var(--color-accent-subtle);
-      border: 1px solid rgba(249, 115, 22, 0.2);
-      border-radius: 100px;
-      font-size: 0.8125rem;
-      font-weight: 500;
-      color: var(--color-accent);
-      margin-bottom: 28px;
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: .45rem;
+      background: var(--orange-dim);
+      border: 1px solid rgba(232,81,10,.3);
+      color: var(--orange);
+      font-size: .78rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      padding: .35rem .9rem; border-radius: 50px;
+      margin-bottom: 1.5rem;
+      animation: fadeUp .7s .05s ease both;
     }
-
-    .hero-badge::before {
-      content: '';
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--color-accent);
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
-
     .hero h1 {
-      font-family: var(--font-display);
-      font-size: clamp(2.75rem, 5vw, 4rem);
-      font-weight: 800;
-      line-height: 1.08;
-      letter-spacing: -0.03em;
-      margin-bottom: 24px;
+      font-size: clamp(2.88rem, 6.6vw, 4.8rem);
+      font-weight: 900; line-height: 1.1;
+      color: var(--charcoal);
+      animation: fadeUp .7s .1s ease both;
     }
-
-    .hero h1 em {
-      font-style: italic;
-      color: var(--color-accent);
-    }
-
+    .hero h1 em { font-style: italic; color: var(--orange); }
     .hero-sub {
-      font-size: 1.1875rem;
-      line-height: 1.6;
-      color: var(--color-text-muted);
-      max-width: 480px;
-      margin-bottom: 40px;
+      margin: 1.4rem auto 0;
+      font-size: 1.05rem; font-weight: 400; line-height: 1.75;
+      color: var(--mid); max-width: 48ch;
+      animation: fadeUp .7s .15s ease both;
     }
 
-    .hero-cta-row {
-      display: flex;
-      gap: 16px;
-      align-items: center;
-      flex-wrap: wrap;
+    .hero-rule {
+      width: 60px; height: 3px;
+      background: linear-gradient(90deg, var(--orange), var(--green));
+      border-radius: 2px;
+      margin: 2rem auto;
+      animation: fadeUp .7s .2s ease both;
     }
 
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 16px 32px;
-      background: var(--color-accent);
-      color: var(--color-bg);
-      font-weight: 700;
-      font-size: 1rem;
-      border-radius: 100px;
-      transition: all 0.2s;
-      letter-spacing: 0.01em;
-    }
-
-    .btn-primary:hover { background: var(--color-accent-hover); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(249, 115, 22, 0.3); }
-
-    .btn-primary svg { width: 18px; height: 18px; }
-
-    .btn-ghost {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 16px 24px;
-      color: var(--color-text-muted);
-      font-weight: 500;
-      font-size: 1rem;
-      transition: color 0.2s;
-    }
-
-    .btn-ghost:hover { color: var(--color-text); }
-
-    /* Hero preview card */
-    .hero-preview {
-      position: relative;
-      z-index: 1;
-    }
-
-    .preview-card {
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
+    /* ── SIGNUP BOX ──────────────────────────────────── */
+    .signup-box {
+      background: var(--white);
+      border: 1px solid var(--rule);
       border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 24px 64px rgba(0,0,0,0.4);
-    }
-
-    .preview-card-img {
-      height: 200px;
-      background: linear-gradient(135deg, #292524, #1C1917);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .preview-card-img::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, transparent 50%, var(--color-surface));
-    }
-
-    .preview-food-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      height: 100%;
-    }
-
-    .food-tile {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
-      background: var(--color-surface-hover);
-      border-right: 1px solid var(--color-border);
-    }
-
-    .food-tile:last-child { border-right: none; }
-
-    .preview-card-body { padding: 24px; }
-
-    .preview-card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 12px;
-    }
-
-    .preview-card-name {
-      font-family: var(--font-display);
-      font-size: 1.5rem;
-      font-weight: 700;
-    }
-
-    .preview-card-price {
-      color: var(--color-accent);
-      font-weight: 700;
-      font-size: 0.9375rem;
-    }
-
-    .preview-card-tags {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 16px;
-    }
-
-    .tag {
-      padding: 4px 12px;
-      background: var(--color-surface-hover);
-      border-radius: 100px;
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: var(--color-text-muted);
-    }
-
-    .tag--accent {
-      background: var(--color-accent-subtle);
-      color: var(--color-accent);
-    }
-
-    .preview-card-section { margin-bottom: 16px; }
-
-    .preview-card-section:last-child { margin-bottom: 0; }
-
-    .preview-card-label {
-      font-size: 0.6875rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--color-accent);
-      margin-bottom: 8px;
-    }
-
-    .preview-card-text {
-      font-size: 0.875rem;
-      color: var(--color-text-muted);
-      line-height: 1.6;
-    }
-
-    .order-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .order-list li {
-      font-size: 0.875rem;
-      color: var(--color-text-muted);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .order-list li::before {
-      content: '';
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: var(--color-green);
-      flex-shrink: 0;
-    }
-
-    .skip-list li::before { background: var(--color-red); }
-
-    .preview-card-footer {
-      padding: 16px 24px;
-      border-top: 1px solid var(--color-border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .preview-verified {
-      font-size: 0.75rem;
-      color: var(--color-text-muted);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .preview-verified::before {
-      content: '';
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--color-green);
-    }
-
-    .preview-neighborhood {
-      font-size: 0.75rem;
-      color: var(--color-text-muted);
-    }
-
-    @media (max-width: 900px) {
-      .hero .container { grid-template-columns: 1fr; gap: 48px; }
-      .hero-preview { max-width: 480px; }
-    }
-
-    /* ========== PROBLEM / FRUSTRATIONS ========== */
-    .problems { border-top: 1px solid var(--color-border); }
-
-    .section-eyebrow {
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--color-accent);
-      margin-bottom: 16px;
-    }
-
-    .section-title {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 3.5vw, 2.75rem);
-      font-weight: 800;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      margin-bottom: 20px;
-    }
-
-    .section-sub {
-      font-size: 1.0625rem;
-      color: var(--color-text-muted);
-      max-width: 560px;
-      margin-bottom: 56px;
-      line-height: 1.6;
-    }
-
-    .problems-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .problem-card {
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: 16px;
-      padding: 32px 28px;
-      transition: border-color 0.2s, transform 0.2s;
-    }
-
-    .problem-card:hover { border-color: rgba(249, 115, 22, 0.3); transform: translateY(-2px); }
-
-    .problem-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      background: var(--color-surface-hover);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 20px;
-      font-size: 1.5rem;
-    }
-
-    .problem-card h3 {
-      font-size: 1.0625rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-      letter-spacing: -0.01em;
-    }
-
-    .problem-card p {
-      font-size: 0.9375rem;
-      color: var(--color-text-muted);
-      line-height: 1.6;
-    }
-
-    @media (max-width: 900px) {
-      .problems-grid { grid-template-columns: 1fr; max-width: 480px; }
-    }
-
-    /* ========== HOW IT WORKS ========== */
-    .how-it-works { border-top: 1px solid var(--color-border); }
-
-    .hiw-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
-    }
-
-    .hiw-step {
-      text-align: center;
-      padding: 40px 24px;
-    }
-
-    .hiw-number {
-      font-family: var(--font-display);
-      font-size: 3.5rem;
-      font-weight: 800;
-      color: var(--color-accent);
-      opacity: 0.3;
-      line-height: 1;
-      margin-bottom: 20px;
-    }
-
-    .hiw-step h3 {
-      font-size: 1.1875rem;
-      font-weight: 700;
-      margin-bottom: 10px;
-      letter-spacing: -0.01em;
-    }
-
-    .hiw-step p {
-      font-size: 0.9375rem;
-      color: var(--color-text-muted);
-      line-height: 1.6;
-      max-width: 300px;
-      margin: 0 auto;
-    }
-
-    @media (max-width: 768px) {
-      .hiw-grid { grid-template-columns: 1fr; gap: 8px; }
-      .hiw-step { text-align: left; padding: 24px 0; }
-      .hiw-step p { margin: 0; }
-    }
-
-    /* ========== FEATURES ========== */
-    .features { border-top: 1px solid var(--color-border); }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-    }
-
-    .feature-card {
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: 16px;
-      padding: 36px 32px;
-      transition: border-color 0.2s;
-    }
-
-    .feature-card:hover { border-color: rgba(249, 115, 22, 0.3); }
-
-    .feature-card--wide {
-      grid-column: 1 / -1;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      align-items: center;
-    }
-
-    .feature-icon {
-      font-size: 1.75rem;
-      margin-bottom: 20px;
-    }
-
-    .feature-card h3 {
-      font-size: 1.1875rem;
-      font-weight: 700;
-      margin-bottom: 10px;
-      letter-spacing: -0.01em;
-    }
-
-    .feature-card p {
-      font-size: 0.9375rem;
-      color: var(--color-text-muted);
-      line-height: 1.6;
-    }
-
-    .feature-collections {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .collection-pill {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 14px 20px;
-      background: var(--color-surface-hover);
-      border: 1px solid var(--color-border);
-      border-radius: 12px;
-      font-size: 0.9375rem;
-      font-weight: 500;
-      transition: border-color 0.2s;
-    }
-
-    .collection-pill:hover { border-color: var(--color-accent); }
-
-    .collection-pill-icon { font-size: 1.25rem; }
-
-    .collection-pill-count {
-      margin-left: auto;
-      font-size: 0.75rem;
-      color: var(--color-text-muted);
-      font-weight: 400;
-    }
-
-    @media (max-width: 768px) {
-      .features-grid { grid-template-columns: 1fr; }
-      .feature-card--wide { grid-template-columns: 1fr; gap: 24px; }
-    }
-
-    /* ========== NEIGHBORHOODS ========== */
-    .neighborhoods { border-top: 1px solid var(--color-border); }
-
-    .hood-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-    }
-
-    .hood-card {
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: 16px;
-      padding: 28px 24px;
-      text-align: center;
-      transition: all 0.2s;
-      cursor: pointer;
-    }
-
-    .hood-card:hover {
-      border-color: var(--color-accent);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-    }
-
-    .hood-emoji {
-      font-size: 2rem;
-      margin-bottom: 12px;
-    }
-
-    .hood-card h3 {
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
-    .hood-card p {
-      font-size: 0.8125rem;
-      color: var(--color-text-muted);
-    }
-
-    @media (max-width: 768px) {
-      .hood-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    /* ========== QUOTE ========== */
-    .quote-section {
-      border-top: 1px solid var(--color-border);
-      text-align: center;
-    }
-
-    .quote-block {
-      max-width: 720px;
-      margin: 0 auto;
-    }
-
-    .quote-mark {
-      font-family: var(--font-display);
-      font-size: 5rem;
-      color: var(--color-accent);
-      opacity: 0.3;
-      line-height: 0.5;
-      margin-bottom: 16px;
-    }
-
-    blockquote {
-      font-family: var(--font-display);
-      font-size: clamp(1.25rem, 2.5vw, 1.625rem);
-      font-weight: 700;
-      font-style: italic;
-      line-height: 1.5;
-      margin-bottom: 28px;
-    }
-
-    .quote-author {
-      font-size: 0.9375rem;
-      color: var(--color-text-muted);
-    }
-
-    .quote-author strong { color: var(--color-text); }
-
-    /* ========== NEWSLETTER ========== */
-    .newsletter {
-      border-top: 1px solid var(--color-border);
-    }
-
-    .newsletter-card {
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: 24px;
-      padding: 64px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .newsletter-card::before {
-      content: '';
-      position: absolute;
-      top: -100px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 600px;
-      height: 400px;
-      background: radial-gradient(circle, rgba(249, 115, 22, 0.06) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .newsletter-card .section-eyebrow,
-    .newsletter-card .section-title,
-    .newsletter-card .section-sub {
-      position: relative;
-      z-index: 1;
-    }
-
-    .newsletter-card .section-sub {
-      max-width: 480px;
-      margin-left: auto;
-      margin-right: auto;
-      margin-bottom: 36px;
-    }
-
-    .newsletter-form {
-      display: flex;
-      gap: 12px;
-      max-width: 440px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
-
-    .newsletter-input {
-      flex: 1;
-      padding: 14px 20px;
-      background: var(--color-bg);
-      border: 1px solid var(--color-border);
-      border-radius: 100px;
-      color: var(--color-text);
-      font-family: var(--font-body);
-      font-size: 0.9375rem;
+      padding: 2.2rem 2rem;
+      box-shadow: 0 8px 40px rgba(0,0,0,.07);
+      max-width: 520px; margin: 0 auto;
+      animation: fadeUp .7s .25s ease both;
+    }
+    .signup-box h3 {
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--charcoal); margin-bottom: .4rem;
+    }
+    .signup-box p {
+      font-size: .88rem; color: var(--mid); margin-bottom: 1.4rem; line-height: 1.6;
+    }
+    .signup-box p strong { color: var(--orange); }
+    .form-row {
+      display: flex; gap: .65rem; flex-wrap: wrap;
+    }
+    .form-row input[type="email"] {
+      flex: 1; min-width: 200px;
+      padding: .8rem 1.1rem;
+      border: 2px solid var(--rule);
+      border-radius: 7px;
+      font-family: 'Figtree', sans-serif;
+      font-size: .95rem; color: var(--charcoal);
+      background: var(--offwhite);
       outline: none;
-      transition: border-color 0.2s;
+      transition: border-color .2s;
     }
-
-    .newsletter-input::placeholder { color: var(--color-text-muted); }
-    .newsletter-input:focus { border-color: var(--color-accent); }
-
-    .newsletter-btn {
-      padding: 14px 28px;
-      background: var(--color-accent);
-      color: var(--color-bg);
-      font-weight: 700;
-      font-size: 0.9375rem;
-      border-radius: 100px;
-      transition: background 0.2s;
+    .form-row input[type="email"]:focus { border-color: var(--orange); }
+    .form-row input[type="email"]::placeholder { color: #aaa; }
+    .btn-subscribe {
+      background: var(--orange); color: var(--white);
+      font-family: 'Figtree', sans-serif;
+      font-weight: 700; font-size: .95rem;
+      padding: .8rem 1.6rem; border-radius: 7px;
+      border: none; cursor: pointer;
+      transition: background .2s, transform .15s;
       white-space: nowrap;
     }
-
-    .newsletter-btn:hover { background: var(--color-accent-hover); }
-
-    .newsletter-note {
-      margin-top: 16px;
-      font-size: 0.8125rem;
-      color: var(--color-text-muted);
-      position: relative;
-      z-index: 1;
+    .btn-subscribe:hover { background: var(--orange-lt); transform: translateY(-2px); }
+    .signup-note {
+      font-size: .73rem; color: #bbb; margin-top: .9rem; text-align: center;
+    }
+    .success-msg {
+      display: none;
+      background: var(--green-dim);
+      border: 1px solid rgba(46,125,50,.3);
+      color: var(--green);
+      border-radius: 8px; padding: .9rem 1.2rem;
+      font-size: .92rem; font-weight: 600; text-align: center;
+      margin-top: 1rem;
     }
 
-    @media (max-width: 600px) {
-      .newsletter-card { padding: 40px 24px; }
-      .newsletter-form { flex-direction: column; }
+    /* ── WHAT TO EXPECT ──────────────────────────────── */
+    .expect {
+      padding: 3rem 2rem;
+      background: var(--white);
+    }
+    .expect-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+    .section-label {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--green); margin-bottom: .6rem;
+    }
+    .section-label::before, .section-label::after {
+      content: ''; display: block; width: 18px; height: 2px; background: var(--green);
+    }
+    .section-title {
+      font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 900;
+      color: var(--charcoal); margin-bottom: .6rem;
+    }
+    .section-sub {
+      font-size: .98rem; color: var(--mid); line-height: 1.75;
+      max-width: 50ch; margin: 0 auto 3rem;
+    }
+    .expect-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8rem;
+    }
+    .expect-card {
+      background: var(--offwhite);
+      border: 1px solid var(--rule);
+      border-radius: 10px; padding: 1.1rem 1.2rem;
+      text-align: left;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .expect-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,.07); }
+    .expect-icon {
+      width: 34px; height: 34px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; margin-bottom: .6rem;
+    }
+    .expect-icon.o { background: var(--orange-dim); }
+    .expect-icon.g { background: var(--green-dim); }
+    .expect-card h4 { font-size: 1.2rem; font-weight: 700; margin-bottom: .4rem; }
+    .expect-card p { font-size: 1.02rem; color: var(--mid); line-height: 1.7; }
+
+    /* ── SPOTLIGHT ───────────────────────────────────── */
+    .spotlight {
+      padding: 5rem 2rem;
+      background: var(--offwhite);
+    }
+    .spotlight-inner { max-width: 900px; margin: 0 auto; }
+    .spotlight-head { text-align: center; margin-bottom: 3rem; }
+    .spotlight-card {
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 20px; overflow: hidden;
+      display: grid; grid-template-columns: 1fr 1fr;
+      box-shadow: 0 12px 48px rgba(0,0,0,.08);
+    }
+    .spotlight-visual {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2e2e2e 60%, #1c3320 100%);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 3rem 2rem; gap: 1rem;
+      position: relative; min-height: 360px;
+    }
+    .spotlight-visual::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at 30% 40%, rgba(232,81,10,.2) 0%, transparent 60%);
+    }
+    .spotlight-badge {
+      position: relative; z-index: 2;
+      background: var(--orange); color: var(--white);
+      font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      padding: .3rem .85rem; border-radius: 20px;
+    }
+    .spotlight-emoji {
+      position: relative; z-index: 2; font-size: 5rem; line-height: 1;
+    }
+    .spotlight-visual h3 {
+      position: relative; z-index: 2;
+      font-size: 1.5rem; color: var(--white); text-align: center;
+    }
+    .spotlight-visual .meta {
+      position: relative; z-index: 2;
+      font-size: .82rem; color: rgba(255,255,255,.55); text-align: center;
+    }
+    .spotlight-visual .stars { color: #fbbf24; font-size: .95rem; position: relative; z-index: 2; }
+    .spotlight-body {
+      padding: 2.5rem 2.2rem;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .spotlight-body .week-label {
+      font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--green); margin-bottom: .6rem;
+      display: flex; align-items: center; gap: .4rem;
+    }
+    .spotlight-body .week-label::before {
+      content: ''; width: 16px; height: 2px; background: var(--green); display: block;
+    }
+    .spotlight-body h2 {
+      font-size: 1.7rem; font-weight: 900; line-height: 1.2;
+      color: var(--charcoal); margin-bottom: 1rem;
+    }
+    .spotlight-body p {
+      font-size: .92rem; line-height: 1.8; color: var(--mid); margin-bottom: 1.5rem;
+    }
+    .spotlight-tags { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .tag {
+      background: var(--orange-dim); color: var(--orange);
+      font-size: .72rem; font-weight: 600; padding: .25rem .7rem; border-radius: 20px;
+    }
+    .tag.g { background: var(--green-dim); color: var(--green); }
+    .spotlight-cta {
+      display: inline-flex; align-items: center; gap: .4rem;
+      background: var(--charcoal); color: var(--white);
+      font-family: 'Figtree', sans-serif; font-weight: 700; font-size: .88rem;
+      padding: .75rem 1.4rem; border-radius: 7px;
+      border: none; cursor: pointer;
+      transition: background .2s, transform .15s; width: fit-content;
+    }
+    .spotlight-cta:hover { background: var(--orange); transform: translateY(-2px); }
+    .spotlight-locked {
+      font-size: .75rem; color: #bbb; margin-top: .75rem;
+      display: flex; align-items: center; gap: .3rem;
     }
 
-    /* ========== FOOTER ========== */
+    /* ── BOTTOM CTA ──────────────────────────────────── */
+    .bottom-cta {
+      background: linear-gradient(135deg, var(--orange) 0%, #c94208 100%);
+      padding: 5rem 2rem; text-align: center; color: var(--white);
+    }
+    .bottom-cta h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 900;
+      color: var(--white); margin-bottom: .75rem;
+    }
+    .bottom-cta p {
+      font-size: 1rem; opacity: .88; line-height: 1.7; margin-bottom: 2rem;
+      max-width: 46ch; margin-left: auto; margin-right: auto;
+    }
+    .bottom-form {
+      display: flex; gap: .75rem; justify-content: center; flex-wrap: wrap;
+    }
+    .bottom-form input[type="email"] {
+      flex: 1; min-width: 240px; max-width: 320px;
+      padding: .85rem 1.25rem; border-radius: 7px;
+      border: 2px solid rgba(255,255,255,.3);
+      background: rgba(255,255,255,.15);
+      color: var(--white); font-size: .95rem; font-family: 'Figtree', sans-serif;
+      outline: none; transition: border-color .2s;
+    }
+    .bottom-form input[type="email"]::placeholder { color: rgba(255,255,255,.6); }
+    .bottom-form input[type="email"]:focus { border-color: var(--white); }
+    .bottom-form button {
+      background: var(--white); color: var(--orange);
+      font-family: 'Figtree', sans-serif; font-weight: 700; font-size: .95rem;
+      padding: .85rem 1.8rem; border-radius: 7px; border: none; cursor: pointer;
+      transition: opacity .2s, transform .15s;
+    }
+    .bottom-form button:hover { opacity: .92; transform: translateY(-2px); }
+    .bottom-note { font-size: .73rem; opacity: .6; margin-top: 1rem; }
+
+    /* ── FOOTER ──────────────────────────────────────── */
     footer {
-      border-top: 1px solid var(--color-border);
-      padding: 48px 0;
+      background: #1a1a1a; color: rgba(255,255,255,.5);
+      padding: 2.5rem 2.5rem 2rem;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+    }
+    footer .brand { font-family: 'Playfair Display', serif; font-size: 1.1rem; }
+    footer .brand span:first-child { color: var(--orange-lt); }
+    footer .brand span:last-child { color: var(--green-lt); }
+    footer p { font-size: .78rem; }
+    footer a { color: rgba(255,255,255,.4); transition: color .2s; }
+    footer a:hover { color: var(--orange-lt); }
+
+    /* ── ANIMATIONS ──────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
-    .footer-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 24px;
-    }
-
-    .footer-brand p {
-      font-size: 0.875rem;
-      color: var(--color-text-muted);
-      margin-top: 4px;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 32px;
-    }
-
-    .footer-links a {
-      font-size: 0.875rem;
-      color: var(--color-text-muted);
-      transition: color 0.2s;
-    }
-
-    .footer-links a:hover { color: var(--color-text); }
-
-    @media (max-width: 600px) {
-      .footer-content { flex-direction: column; text-align: center; }
-    }
-
-    /* ========== ANIMATIONS ========== */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
+    /* ── RESPONSIVE ──────────────────────────────────── */
+    @media (max-width: 750px) {
+      nav { padding: 0 1.2rem; }
+      .nav-links { display: none; }
+      .expect-grid { grid-template-columns: 1fr; }
+      .spotlight-card { grid-template-columns: 1fr; }
+      .spotlight-visual { min-height: 240px; }
+      footer { flex-direction: column; text-align: center; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <div class="container">
-      <div class="logo">restaurants<span>ATX</span></div>
-      <a href="#newsletter" class="nav-cta">Get Early Access</a>
+<!-- ═══ NAV ════════════════════════════════════════════ -->
+<nav>
+  <div class="nav-logo">
+    <img src="restaurantsATX_final.jpg" alt="restaurantsATX logo" />
+  </div>
+  <ul class="nav-links">
+    <li><a href="#spotlight">This Week</a></li>
+    <li><a href="#expect">What's Inside</a></li>
+    <li><a href="#signup" class="nav-cta">Subscribe Now</a></li>
+  </ul>
+</nav>
+
+<!-- ═══ HERO ════════════════════════════════════════════ -->
+<section class="hero" id="top">
+  <div class="hero-inner">
+
+    <div class="hero-logo">
+      <img src="restaurantsATX_final.jpg" alt="restaurantsATX" />
     </div>
-  </nav>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="container">
-      <div class="hero-content">
-        <div class="hero-badge">Launching Summer 2026</div>
-        <h1>Stop guessing.<br>Start <em>eating.</em></h1>
-        <p class="hero-sub">Honest, opinionated restaurant recs from people who actually live in Austin. No&nbsp;ads. No&nbsp;influencers. No&nbsp;pay&#8209;to&#8209;play. Just real recs for&nbsp;real&nbsp;locals.</p>
-        <div class="hero-cta-row">
-          <a href="#newsletter" class="btn-primary">
-            Join the Waitlist
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
-          </a>
-          <a href="#how-it-works" class="btn-ghost">See how it works</a>
-        </div>
+    <div class="hero-eyebrow">Austin, Texas · Free Weekly Newsletter</div>
+
+    <h1>One restaurant.<br><em>One story.</em><br>Every week.</h1>
+
+    <p class="hero-sub">Every Wednesday, we celebrate one Austin restaurant through the eyes of the people who love it most — locals sharing the meals, moments, and places that make this city unique.</p>
+
+    <div class="hero-rule"></div>
+
+    <div class="signup-box" id="signup">
+      <h3>Get Austin's best recs in your inbox every Wednesday 🍽️</h3>
+      <p>Join local food lovers who get the weekly spotlight delivered every <strong>Wednesday morning.</strong></p>
+      <form class="form-row" onsubmit="handleSubscribe(event, 'hero-success', this)">
+        <input type="email" placeholder="your@email.com" required />
+        <button type="submit" class="btn-subscribe">Subscribe Now →</button>
+      </form>
+      <div class="success-msg" id="hero-success">🎉 You're in! Check your inbox this Wednesday.</div>
+      <p class="signup-note">No spam, ever. Unsubscribe anytime. Austin only.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ WHAT TO EXPECT ══════════════════════════════════ -->
+<section class="expect" id="expect">
+  <div class="expect-inner">
+    <div class="section-label">What's Inside</div>
+    <h2 class="section-title">More than a restaurant guide</h2>
+    <p class="section-sub">Each issue will include a mini story about a place worth knowing — told with care.</p>
+    <div class="expect-grid">
+      <div class="expect-card">
+        <div class="expect-icon o">🔦</div>
+        <h4>Weekly Spotlight</h4>
+        <p>One Austin restaurant featured in depth — the food, the vibe, the must-orders, and the story behind it.</p>
       </div>
-
-      <div class="hero-preview fade-in">
-        <div class="preview-card">
-          <div class="preview-card-img">
-            <div class="preview-food-grid">
-              <div class="food-tile" aria-hidden="true">&#127790;</div>
-              <div class="food-tile" aria-hidden="true">&#127858;</div>
-              <div class="food-tile" aria-hidden="true">&#127862;</div>
-            </div>
-          </div>
-          <div class="preview-card-body">
-            <div class="preview-card-header">
-              <div class="preview-card-name">Suerte</div>
-              <div class="preview-card-price">$$$</div>
-            </div>
-            <div class="preview-card-tags">
-              <span class="tag tag--accent">Date Night</span>
-              <span class="tag">Mexican</span>
-              <span class="tag">East Austin</span>
-            </div>
-            <div class="preview-card-section">
-              <div class="preview-card-label">Editor's Take</div>
-              <p class="preview-card-text">The masa program alone makes this place worth the trip. Upscale without feeling pretentious, and the bar team is doing some of the most interesting work in the city right now. Not cheap, but you'll leave feeling like you got your money's worth.</p>
-            </div>
-            <div class="preview-card-section">
-              <div class="preview-card-label">What to Order</div>
-              <ul class="order-list">
-                <li>Suerte Tortillas (always)</li>
-                <li>Wagyu Barbacoa</li>
-                <li>Any seasonal masa dish</li>
-              </ul>
-            </div>
-            <div class="preview-card-section">
-              <div class="preview-card-label">What to Skip</div>
-              <ul class="order-list skip-list">
-                <li>The churros (just fine, not special)</li>
-              </ul>
-            </div>
-          </div>
-          <div class="preview-card-footer">
-            <span class="preview-verified">Verified Feb 2026</span>
-            <span class="preview-neighborhood">East Cesar Chavez</span>
-          </div>
-        </div>
+      <div class="expect-card">
+        <div class="expect-icon g">👨‍🍳</div>
+        <h4>Chef Stories</h4>
+        <p>Coming soon — intimate interviews with the chefs and culinary minds shaping Austin's food scene.</p>
+      </div>
+      <div class="expect-card">
+        <div class="expect-icon o">📍</div>
+        <h4>Local First, Always</h4>
+        <p>Only independent Austin restaurants. No chains, no sponsored content — just places locals actually love.</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- PROBLEMS -->
-  <section class="problems">
-    <div class="container">
-      <div class="section-eyebrow fade-in">The Problem</div>
-      <h2 class="section-title fade-in">Finding good food in Austin<br>shouldn't be this hard.</h2>
-      <p class="section-sub fade-in">You already know about Franklin BBQ. You need someone to tell you where to eat <em>tonight</em>.</p>
-      <div class="problems-grid">
-        <div class="problem-card fade-in">
-          <div class="problem-icon">&#11088;</div>
-          <h3>Reviews you can't trust</h3>
-          <p>Yelp is full of grudges and Google is full of bots. Five stars from someone mad about parking tells you nothing about the food.</p>
-        </div>
-        <div class="problem-card fade-in">
-          <div class="problem-icon">&#128242;</div>
-          <h3>Influencers are selling</h3>
-          <p>That "hidden gem" your favorite food account posted? Paid partnership. You can't tell what's real anymore.</p>
-        </div>
-        <div class="problem-card fade-in">
-          <div class="problem-icon">&#128240;</div>
-          <h3>"Best of" lists are stale</h3>
-          <p>The same 15 restaurants recycled every year. Austin's scene moves fast. These lists don't.</p>
-        </div>
-        <div class="problem-card fade-in">
-          <div class="problem-icon">&#128269;</div>
-          <h3>Search is broken</h3>
-          <p>You want "date night, East side, under $50." You get a cuisine dropdown and a zip code field. Not the same thing.</p>
-        </div>
-        <div class="problem-card fade-in">
-          <div class="problem-icon">&#128172;</div>
-          <h3>Reddit is chaos</h3>
-          <p>r/austinfood has real opinions buried in year-old threads you'll never find again. Great signal, terrible structure.</p>
-        </div>
-        <div class="problem-card fade-in">
-          <div class="problem-icon">&#128248;</div>
-          <h3>No one says what to order</h3>
-          <p>Knowing a restaurant is "good" isn't enough. You want to know exactly what to get — and what to skip.</p>
-        </div>
-      </div>
+<!-- ═══ SPOTLIGHT COMING SOON ════════════════════════════ -->
+<section class="spotlight" id="spotlight">
+  <div class="spotlight-inner">
+    <div class="spotlight-head">
+      <div class="section-label">In the Spotlight</div>
+      <h2 class="section-title">Coming Soon</h2>
+      <p class="section-sub">Each week, one Austin restaurant will be celebrated here. Subscribe to be the first to know when we launch.</p>
     </div>
-  </section>
-
-  <!-- HOW IT WORKS -->
-  <section class="how-it-works" id="how-it-works">
-    <div class="container">
-      <div class="section-eyebrow fade-in">How It Works</div>
-      <h2 class="section-title fade-in">Not a review site.<br>Your friend who knows every spot.</h2>
-      <p class="section-sub fade-in">Every recommendation on restaurantsATX is written by someone who lives here, eats here, and will tell you the truth.</p>
-      <div class="hiw-grid">
-        <div class="hiw-step fade-in">
-          <div class="hiw-number">01</div>
-          <h3>We eat everywhere</h3>
-          <p>Our editors visit every restaurant at least twice before it hits the site. We re-verify every 6 months. If the quality drops, you'll know.</p>
-        </div>
-        <div class="hiw-step fade-in">
-          <div class="hiw-number">02</div>
-          <h3>We tell you what to order</h3>
-          <p>Not just "this place is good." We tell you exactly what to get, what to skip, when to go, and whether it's worth the price.</p>
-        </div>
-        <div class="hiw-step fade-in">
-          <div class="hiw-number">03</div>
-          <h3>We never take money for recs</h3>
-          <p>Restaurants can't pay for placement or better reviews. Period. If we recommend it, it's because we'd send our friends there.</p>
-        </div>
-      </div>
+    <div style="
+      background: var(--white);
+      border: 2px dashed var(--rule);
+      border-radius: 20px;
+      padding: 4rem 2rem;
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+    ">
+      <div style="font-size: 3rem; margin-bottom: 1rem;">🍽️</div>
+      <h3 style="font-size: 1.4rem; color: var(--charcoal); margin-bottom: .6rem;">First spotlight dropping soon</h3>
+      <p style="font-size: .95rem; color: var(--mid); line-height: 1.7; max-width: 38ch; margin: 0 auto 1.8rem;">Subscribe now and you'll be the first Austin food lover to get our inaugural restaurant feature.</p>
+      <button class="spotlight-cta" onclick="document.getElementById('signup').scrollIntoView({behavior:'smooth'})">
+        Subscribe to Get Notified
+      </button>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- FEATURES -->
-  <section class="features">
-    <div class="container">
-      <div class="section-eyebrow fade-in">What You Get</div>
-      <h2 class="section-title fade-in">Built for the way you<br>actually pick restaurants.</h2>
-      <p class="section-sub fade-in">Search by vibe, neighborhood, or occasion. Save your list. Share with your group chat. No account required to browse.</p>
-      <div class="features-grid">
-        <div class="feature-card fade-in">
-          <div class="feature-icon">&#127987;&#65039;</div>
-          <h3>Search by what matters</h3>
-          <p>Filter by neighborhood, vibe, occasion, price, and cuisine. Find "chill patio spot in North Loop under $30" in seconds, not scrolling sessions.</p>
-        </div>
-        <div class="feature-card fade-in">
-          <div class="feature-icon">&#9889;</div>
-          <h3>New openings, fast</h3>
-          <p>Know about places before the line forms. Our feed covers every notable opening, closing, and chef change as it happens — not months later.</p>
-        </div>
-        <div class="feature-card fade-in">
-          <div class="feature-icon">&#128278;</div>
-          <h3>Share-ready recs</h3>
-          <p>Send a restaurant card straight to your group chat with the editor's take, what to order, and a reservation link. No more "let me find that screenshot."</p>
-        </div>
-        <div class="feature-card fade-in">
-          <div class="feature-icon">&#128209;</div>
-          <h3>Your personal list</h3>
-          <p>Save restaurants to a "Want to Try" list. Finally, one place for all those recs instead of scattered screenshots and forgotten bookmarks.</p>
-        </div>
-        <div class="feature-card feature-card--wide fade-in">
-          <div>
-            <div class="feature-icon">&#128218;</div>
-            <h3>Curated collections for every occasion</h3>
-            <p>Editorially maintained guides that answer the questions you actually ask — not generic "Best Restaurants" roundups, but specific, useful lists kept up to date.</p>
-          </div>
-          <div class="feature-collections">
-            <div class="collection-pill">
-              <span class="collection-pill-icon">&#127769;</span>
-              <span>Date Night Under $50</span>
-              <span class="collection-pill-count">14 spots</span>
-            </div>
-            <div class="collection-pill">
-              <span class="collection-pill-icon">&#127793;</span>
-              <span>Best Patios in Austin</span>
-              <span class="collection-pill-count">22 spots</span>
-            </div>
-            <div class="collection-pill">
-              <span class="collection-pill-icon">&#127790;</span>
-              <span>Every Taco Truck on Riverside</span>
-              <span class="collection-pill-count">9 spots</span>
-            </div>
-            <div class="collection-pill">
-              <span class="collection-pill-icon">&#127942;</span>
-              <span>New & Worth the Hype</span>
-              <span class="collection-pill-count">8 spots</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<!-- ═══ BOTTOM CTA ═══════════════════════════════════════ -->
+<section class="bottom-cta">
+  <h2>Don't miss next Wednesday's pick 🍽️</h2>
+  <p>A new Austin restaurant story lands in your inbox every Wednesday morning. Free, local, and always worth reading.</p>
+  <form class="bottom-form" onsubmit="handleSubscribe(event, 'bottom-success', this)">
+    <input type="email" placeholder="your@email.com" required />
+    <button type="submit">Subscribe Now →</button>
+  </form>
+  <div class="success-msg" id="bottom-success" style="max-width:400px;margin:1rem auto 0;">🎉 You're in! See you Wednesday.</div>
+  <p class="bottom-note">No spam. Unsubscribe anytime.</p>
+</section>
 
-  <!-- NEIGHBORHOODS -->
-  <section class="neighborhoods">
-    <div class="container">
-      <div class="section-eyebrow fade-in">Explore by Neighborhood</div>
-      <h2 class="section-title fade-in">Every corner of Austin, covered.</h2>
-      <p class="section-sub fade-in">From East Cesar Chavez taquerias to Domain date nights. Discover what's good in your part of town.</p>
-      <div class="hood-grid">
-        <div class="hood-card fade-in">
-          <div class="hood-emoji" aria-hidden="true">&#127798;</div>
-          <h3>East Austin</h3>
-          <p>64 spots</p>
-        </div>
-        <div class="hood-card fade-in">
-          <div class="hood-emoji" aria-hidden="true">&#127925;</div>
-          <h3>South Congress</h3>
-          <p>38 spots</p>
-        </div>
-        <div class="hood-card fade-in">
-          <div class="hood-emoji" aria-hidden="true">&#127811;</div>
-          <h3>North Loop</h3>
-          <p>27 spots</p>
-        </div>
-        <div class="hood-card fade-in">
-          <div class="hood-emoji" aria-hidden="true">&#128293;</div>
-          <h3>South Lamar</h3>
-          <p>41 spots</p>
-        </div>
-        <div class="hood-card fade-in">
-          <div class="hood-emoji" aria-hidden="true">&#127750;</div>
-          <h3>Downtown</h3>
-          <p>53 spots</p>
-        </div>
-        <div class="hood-card fade-in">
-          <div class="hood-emoji" aria-hidden="true">&#9889;</div>
-          <h3>The Domain</h3>
-          <p>19 spots</p>
-        </div>
-        <div class="hood-card fade-in">
-          <div class="hood-emoji" aria-hidden="true">&#127796;</div>
-          <h3>Mueller</h3>
-          <p>16 spots</p>
-        </div>
-        <div class="hood-card fade-in">
-          <div class="hood-emoji" aria-hidden="true">&#128038;</div>
-          <h3>South Austin</h3>
-          <p>34 spots</p>
-        </div>
-      </div>
-    </div>
-  </section>
+<!-- ═══ FOOTER ═══════════════════════════════════════════ -->
+<footer>
+  <div class="brand"><span>restaurants</span><span>ATX</span></div>
+  <p>© 2025 restaurantsATX.com · Made with 🧡 in Austin, TX</p>
+  <p><a href="#">Privacy Policy</a> · <a href="#">Contact</a></p>
+</footer>
 
-  <!-- QUOTE -->
-  <section class="quote-section">
-    <div class="container">
-      <div class="quote-block fade-in">
-        <div class="quote-mark">"</div>
-        <blockquote>I don't need another 'Top 10 Tacos in Austin' list. I need someone to tell me the new place on East 7th has incredible mole but the margaritas are mid, the wait is 45 minutes on weekends but empty on Wednesdays, and it's cash only.</blockquote>
-        <p class="quote-author"><strong>Sofia R.</strong> &mdash; East Austin local, eats out 4x/week, your group chat's go-to rec person</p>
-      </div>
-    </div>
-  </section>
+<script>
+  function handleSubscribe(e, successId, form) {
+    e.preventDefault();
+    const input = form.querySelector('input[type="email"]');
+    const btn = form.querySelector('button');
+    const successEl = document.getElementById(successId);
 
-  <!-- NEWSLETTER -->
-  <section class="newsletter" id="newsletter">
-    <div class="container">
-      <div class="newsletter-card fade-in">
-        <div class="section-eyebrow">The Weekly Bite</div>
-        <h2 class="section-title">Get Austin's best recs<br>in your inbox every Thursday.</h2>
-        <p class="section-sub">One new opening. One underrated gem. One collection you'll actually use. No spam, no sponsored content, just recs.</p>
-        <form class="newsletter-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent = 'You\'re in!'; this.querySelector('input').disabled = true;">
-          <input type="email" class="newsletter-input" placeholder="you@email.com" required aria-label="Email address">
-          <button type="submit" class="newsletter-btn">Join Waitlist</button>
-        </form>
-        <p class="newsletter-note">Free forever. Unsubscribe anytime. We'll never share your email.</p>
-      </div>
-    </div>
-  </section>
+    if (successEl) successEl.style.display = 'block';
+    btn.textContent = '✅ Subscribed!';
+    btn.style.background = '#2E7D32';
+    btn.style.color = '#fff';
+    input.value = '';
+    input.disabled = true;
+    btn.disabled = true;
+  }
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-brand">
-          <div class="logo">restaurants<span>ATX</span></div>
-          <p>Austin eats, no BS.</p>
-        </div>
-        <div class="footer-links">
-          <a href="#">About</a>
-          <a href="#">Contact</a>
-          <a href="#">Instagram</a>
-          <a href="#">Privacy</a>
-        </div>
-      </div>
-    </div>
-  </footer>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
 
-  <!-- SCROLL ANIMATIONS -->
-  <script>
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-    document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
-  </script>
+  document.querySelectorAll('.expect-card, .spotlight-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity .5s ease, transform .5s ease';
+    observer.observe(el);
+  });
+</script>
 
 </body>
 </html>
