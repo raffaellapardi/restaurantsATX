@@ -122,17 +122,18 @@
       background: var(--white);
       border: 1px solid var(--rule);
       border-radius: 16px;
-      padding: 1.4rem 1.6rem 1rem;
+      padding: 1.4rem 1.6rem 0;
       box-shadow: 0 8px 40px rgba(0,0,0,.07);
       max-width: 520px; margin: 0 auto;
+      overflow: hidden;
       animation: fadeUp .7s .25s ease both;
     }
     .signup-box h3 {
-      font-size: 1rem; font-weight: 700;
+      font-size: 1.2rem; font-weight: 700;
       color: var(--charcoal); margin-bottom: .3rem;
     }
     .signup-box p {
-      font-size: .82rem; color: var(--mid); margin-bottom: .6rem; line-height: 1.5;
+      font-size: .98rem; color: var(--mid); margin-bottom: .6rem; line-height: 1.5;
     }
     .signup-box p strong { color: var(--orange); }
     .form-row {
@@ -407,7 +408,9 @@
       <h3>Get Austin's best recs in your inbox every Wednesday 🍽️</h3>
       <p>Join local food lovers who get the weekly spotlight delivered every <strong>Wednesday morning.</strong></p>
       <script async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
-      <iframe src="https://subscribe-forms.beehiiv.com/16cef36b-09fe-47a4-8df1-713eb80d1fe1" class="beehiiv-embed" data-test-id="beehiiv-embed" frameborder="0" scrolling="no" style="width: 100%; height: 320px; margin: 0; border-radius: 0px; background-color: transparent; box-shadow: none; max-width: 100%;"></iframe>
+      <div style="overflow: hidden; height: 260px; margin-bottom: -1rem;">
+        <iframe src="https://subscribe-forms.beehiiv.com/16cef36b-09fe-47a4-8df1-713eb80d1fe1" class="beehiiv-embed" data-test-id="beehiiv-embed" frameborder="0" scrolling="no" style="width: 100%; height: 320px; margin: 0; border-radius: 0px; background-color: transparent; box-shadow: none; max-width: 100%;"></iframe>
+      </div>
       <p class="signup-note">No spam, ever. Unsubscribe anytime. Austin only.</p>
     </div>
 
