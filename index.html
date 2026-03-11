@@ -121,17 +121,17 @@
       background: var(--white);
       border: 1px solid var(--rule);
       border-radius: 16px;
-      padding: 2.2rem 2rem;
+      padding: 1.4rem 1.6rem 1rem;
       box-shadow: 0 8px 40px rgba(0,0,0,.07);
       max-width: 520px; margin: 0 auto;
       animation: fadeUp .7s .25s ease both;
     }
     .signup-box h3 {
-      font-size: 1.1rem; font-weight: 700;
-      color: var(--charcoal); margin-bottom: .4rem;
+      font-size: 1rem; font-weight: 700;
+      color: var(--charcoal); margin-bottom: .3rem;
     }
     .signup-box p {
-      font-size: .88rem; color: var(--mid); margin-bottom: 1.4rem; line-height: 1.6;
+      font-size: .82rem; color: var(--mid); margin-bottom: .6rem; line-height: 1.5;
     }
     .signup-box p strong { color: var(--orange); }
     .form-row {
@@ -188,11 +188,11 @@
       content: ''; display: block; width: 18px; height: 2px; background: var(--green);
     }
     .section-title {
-      font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 900;
+      font-size: clamp(2.04rem, 3.6vw, 2.88rem); font-weight: 900;
       color: var(--charcoal); margin-bottom: .6rem;
     }
     .section-sub {
-      font-size: .98rem; color: var(--mid); line-height: 1.75;
+      font-size: 1.18rem; color: var(--mid); line-height: 1.75;
       max-width: 50ch; margin: 0 auto 3rem;
     }
     .expect-grid {
@@ -200,19 +200,20 @@
     }
     .expect-card {
       background: var(--offwhite);
-      border: 1px solid var(--rule);
+      border: 1.5px solid var(--orange);
       border-radius: 10px; padding: 1.1rem 1.2rem;
-      text-align: left;
+      text-align: center;
       transition: transform .2s, box-shadow .2s;
     }
-    .expect-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,.07); }
+    .expect-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(232,81,10,.12); }
     .expect-icon {
       width: 34px; height: 34px; border-radius: 8px;
       display: flex; align-items: center; justify-content: center;
       font-size: 1rem; margin-bottom: .6rem;
+      font-style: normal;
     }
-    .expect-icon.o { background: var(--orange-dim); }
-    .expect-icon.g { background: var(--green-dim); }
+    .expect-icon.o { background: var(--orange); color: white; }
+    .expect-icon.g { background: var(--green); color: white; }
     .expect-card h4 { font-size: 1.2rem; font-weight: 700; margin-bottom: .4rem; }
     .expect-card p { font-size: 1.02rem; color: var(--mid); line-height: 1.7; }
 
@@ -405,7 +406,7 @@
       <h3>Get Austin's best recs in your inbox every Wednesday 🍽️</h3>
       <p>Join local food lovers who get the weekly spotlight delivered every <strong>Wednesday morning.</strong></p>
       <script async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
-      <iframe src="https://subscribe-forms.beehiiv.com/16cef36b-09fe-47a4-8df1-713eb80d1fe1" class="beehiiv-embed" data-test-id="beehiiv-embed" frameborder="0" scrolling="no" style="width: 100%; height: 351px; margin: 0; border-radius: 0px; background-color: transparent; box-shadow: none; max-width: 100%;"></iframe>
+      <iframe src="https://subscribe-forms.beehiiv.com/16cef36b-09fe-47a4-8df1-713eb80d1fe1" class="beehiiv-embed" data-test-id="beehiiv-embed" frameborder="0" scrolling="no" style="width: 100%; height: 220px; margin: 0; border-radius: 0px; background-color: transparent; box-shadow: none; max-width: 100%;"></iframe>
       <p class="signup-note">No spam, ever. Unsubscribe anytime. Austin only.</p>
     </div>
 
@@ -420,56 +421,31 @@
     <p class="section-sub">Each issue will include a mini story about a place worth knowing — told with care.</p>
     <div class="expect-grid">
       <div class="expect-card">
-        <div class="expect-icon o">🔦</div>
+        <div style="font-size: 2rem; margin-bottom: .6rem; color: var(--orange);">⭐</div>
         <h4>Weekly Spotlight</h4>
-        <p>One Austin restaurant featured in depth — the food, the vibe, the must-orders, and the story behind it.</p>
+        <p>One Austin restaurant featured in depth, the food, the vibe, the must-orders, and the story behind it. Plus a few more callouts from our followers.</p>
       </div>
       <div class="expect-card">
-        <div class="expect-icon g">👨‍🍳</div>
+        <div style="font-size: 2rem; margin-bottom: .6rem;">👨‍🍳</div>
         <h4>Chef Stories</h4>
-        <p>Coming soon — intimate interviews with the chefs and culinary minds shaping Austin's food scene.</p>
+        <p>Coming soon, intimate interviews with the chefs and culinary minds shaping Austin's food scene.</p>
       </div>
       <div class="expect-card">
-        <div class="expect-icon o">📍</div>
-        <h4>Local First, Always</h4>
-        <p>Only independent Austin restaurants. No chains, no sponsored content — just places locals actually love.</p>
+        <div style="font-size: 2rem; margin-bottom: .6rem; color: var(--green);">📍</div>
+        <h4>Local First</h4>
+        <p>Only independent Austin restaurants. No chains, no sponsored content, just places locals actually love.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ SPOTLIGHT COMING SOON ════════════════════════════ -->
-<section class="spotlight" id="spotlight">
-  <div class="spotlight-inner">
-    <div class="spotlight-head">
-      <div class="section-label">In the Spotlight</div>
-      <h2 class="section-title">Coming Soon</h2>
-      <p class="section-sub">Each week, one Austin restaurant will be celebrated here. Subscribe to be the first to know when we launch.</p>
-    </div>
-    <div style="
-      background: var(--white);
-      border: 2px dashed var(--rule);
-      border-radius: 20px;
-      padding: 4rem 2rem;
-      text-align: center;
-      max-width: 600px;
-      margin: 0 auto;
-    ">
-      <div style="font-size: 3rem; margin-bottom: 1rem;">🍽️</div>
-      <h3 style="font-size: 1.4rem; color: var(--charcoal); margin-bottom: .6rem;">First spotlight dropping soon</h3>
-      <p style="font-size: .95rem; color: var(--mid); line-height: 1.7; max-width: 38ch; margin: 0 auto 1.8rem;">Subscribe now and you'll be the first Austin food lover to get our inaugural restaurant feature.</p>
-      <button class="spotlight-cta" onclick="document.getElementById('signup').scrollIntoView({behavior:'smooth'})">
-        Subscribe to Get Notified
-      </button>
-    </div>
-  </div>
-</section>
+
 
 <!-- ═══ BOTTOM CTA ═══════════════════════════════════════ -->
 <section class="bottom-cta">
   <h2>Don't miss next Wednesday's pick 🍽️</h2>
   <p>A new Austin restaurant story lands in your inbox every Wednesday morning. Free, local, and always worth reading.</p>
-  <iframe src="https://subscribe-forms.beehiiv.com/16cef36b-09fe-47a4-8df1-713eb80d1fe1" class="beehiiv-embed" data-test-id="beehiiv-embed" frameborder="0" scrolling="no" style="width: 100%; height: 351px; margin: 0; border-radius: 0px; background-color: transparent; box-shadow: none; max-width: 100%;"></iframe>
+  <iframe src="https://subscribe-forms.beehiiv.com/16cef36b-09fe-47a4-8df1-713eb80d1fe1" class="beehiiv-embed" data-test-id="beehiiv-embed" frameborder="0" scrolling="no" style="width: 100%; height: 220px; margin: 0; border-radius: 0px; background-color: transparent; box-shadow: none; max-width: 100%;"></iframe>
   <div class="success-msg" id="bottom-success" style="max-width:400px;margin:1rem auto 0;">🎉 You're in! See you Wednesday.</div>
   <p class="bottom-note">No spam. Unsubscribe anytime.</p>
 </section>
