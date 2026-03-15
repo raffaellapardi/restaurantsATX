@@ -365,8 +365,17 @@
       .spotlight-visual { min-height: 240px; }
       footer { flex-direction: column; text-align: center; }
       .signup-box { padding: 1.2rem 1rem 0; }
-      .beehiiv-embed { width: 100% !important; max-width: 100% !important; }
-      .bottom-cta .beehiiv-embed { width: 100% !important; max-width: 100% !important; }
+      .beehiiv-embed {
+        width: 150% !important;
+        max-width: 150% !important;
+        transform: scale(0.67);
+        transform-origin: top left;
+        margin-left: -0.5rem !important;
+      }
+      .signup-box-iframe-wrap {
+        overflow: hidden;
+        height: 220px;
+      }
     }
   </style>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-29759YVZF6"></script>
@@ -410,7 +419,7 @@
     <div class="signup-box" id="signup">
       <h3>Get Austin's best recs in your inbox every Wednesday 🍽️</h3>
       <script async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
-      <div style="overflow: hidden; height: 290px; margin-bottom: -1rem;">
+      <div class="signup-box-iframe-wrap" style="overflow: hidden; height: 290px; margin-bottom: -1rem;">
         <iframe src="https://subscribe-forms.beehiiv.com/16cef36b-09fe-47a4-8df1-713eb80d1fe1" class="beehiiv-embed" data-test-id="beehiiv-embed" frameborder="0" scrolling="no" style="width: 100%; height: 360px; margin: 0; border-radius: 0px; background-color: transparent; box-shadow: none; max-width: 100%;"></iframe>
       </div>
       <p class="signup-note">No spam, ever. Unsubscribe anytime. Austin only.</p>
